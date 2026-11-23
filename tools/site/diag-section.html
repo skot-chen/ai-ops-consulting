@@ -1,0 +1,42 @@
+<section id="tool-diag" class="tool">
+  <h2>工具二：401 / 502 / 503 排障向导</h2>
+  <p class="note"><strong>输入</strong>：错误码，以及你已经做过的检查结果（不知道就选"未检查"）。<strong>输出</strong>：问题所在的层（认证 / 网关 / 上游）、依据、对照测试清单。结论基于你填的答案，不是自动探测。</p>
+  <div class="form">
+    <label>错误码
+      <select id="d-code">
+        <option value="401">401 认证失败</option>
+        <option value="502">502 网关连不上上游</option>
+        <option value="503">503 服务不可用</option>
+        <option value="other">其他</option>
+      </select>
+    </label>
+    <label>网关健康检查
+      <select id="d-health"><option value="unknown">未检查</option><option value="ok">正常</option><option value="fail">失败</option></select>
+    </label>
+    <label>直连上游（绕过网关）
+      <select id="d-direct"><option value="unknown">未检查</option><option value="ok">正常</option><option value="fail">失败</option></select>
+    </label>
+    <label>其他链路是否同样失败
+      <select id="d-peer"><option value="unknown">未检查</option><option value="ok">否，只有这条</option><option value="fail">是，多条都失败</option></select>
+    </label>
+    <label>客户端是否同时带多个认证头
+      <select id="d-extra"><option value="unknown">未检查</option><option value="yes">是</option><option value="no">否</option></select>
+    </label>
+    <label>客户端是否有代理环境变量
+      <select id="d-proxy"><option value="unknown">未检查</option><option value="yes">是</option><option value="no">否</option></select>
+    </label>
+    <label>网关地址类型
+      <select id="d-host"><option value="unknown">未确认</option><option value="local">本地域名</option><option value="public">公网地址 / IP</option></select>
+    </label>
+    <label>上游服务商状态页
+      <select id="d-upstream"><option value="unknown">未查看</option><option value="normal">正常</option><option value="incident">有故障公告</option></select>
+    </label>
+  </div>
+  <div class="actions">
+    <button id="d-demo-401" type="button" class="ghost">载入示例：401</button>
+    <button id="d-demo-502" type="button" class="ghost">载入示例：502</button>
+    <button id="d-demo-503" type="button" class="ghost">载入示例：503</button>
+    <button id="d-run" type="button">生成判断</button>
+  </div>
+  <div id="d-out"></div>
+</section>

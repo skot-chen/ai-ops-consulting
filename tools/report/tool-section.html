@@ -1,6 +1,6 @@
-<section id="tool" class="tool">
-  <h2>客户报告生成</h2>
-  <p class="note">选择日志（.log / .txt）和工单或告警（.csv）。文件只在你的浏览器里处理，不会上传到任何服务器。</p>
+<section id="tool-report" class="tool">
+  <h2>工具一：客户报告生成</h2>
+  <p class="note"><strong>输入</strong>：客户的日志（.log / .txt）、工单或告警（.csv）。<strong>输出</strong>：带水印的分析报告，包括概览、异常时段（突增检测）、高频错误模板、工单分类或告警影响面、排查建议。文件只在你的浏览器里处理，不会上传。</p>
   <div class="form">
     <label>客户名 <input id="f-client" value="客户名称"></label>
     <label>编制人 <input id="f-author" value="陈振旭"></label>
@@ -11,8 +11,8 @@
   </div>
   <input id="f-files" type="file" multiple accept=".log,.txt,.csv">
   <div class="actions">
-    <button id="f-demo-log" type="button" class="ghost">演示：日志报告</button>
-    <button id="f-demo-alert" type="button" class="ghost">演示：告警报告</button>
+    <button id="f-demo-log" type="button" class="ghost">载入示例：日志</button>
+    <button id="f-demo-alert" type="button" class="ghost">载入示例：告警</button>
   </div>
   <div class="actions">
     <button id="f-run" type="button">生成报告（用所选文件）</button>

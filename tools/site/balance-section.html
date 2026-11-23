@@ -1,0 +1,17 @@
+<section id="tool-balance" class="tool">
+  <h2>工具三：网关轮换模拟（演示）</h2>
+  <p class="note"><strong>输入</strong>：几个 Key 及各自会返回的结果，请求数，失效恢复时间。<strong>输出</strong>：成功率、切换次数、每个 Key 的用量、逐次请求日志。<strong>这是模拟，不是真实网关</strong>，用来说明轮换和切换的思路。</p>
+  <div class="form">
+    <label>请求数 <input id="b-requests" type="number" value="30" min="1" max="500"></label>
+    <label>失效恢复时间（模拟秒） <input id="b-recover" type="number" value="10" min="0"></label>
+    <label>随机种子 <input id="b-seed" type="number" value="42"></label>
+  </div>
+  <p class="note">Key 列表（状态 = 该 Key 每次被调用时返回的结果）</p>
+  <div id="b-keys"></div>
+  <div class="actions">
+    <button id="b-add" type="button" class="ghost">+ 添加 Key</button>
+    <button id="b-demo" type="button" class="ghost">载入示例</button>
+    <button id="b-run" type="button">运行模拟</button>
+  </div>
+  <div id="b-out"></div>
+</section>

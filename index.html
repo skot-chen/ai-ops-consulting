@@ -66,6 +66,14 @@
   .tool .actions { display: flex; gap: 8px; margin: 8px 0; }
   .tool button { padding: 9px 16px; font-size: 14px; }
   .tool button.ghost { background: #fff; color: var(--indigo); border: 1px solid var(--indigo); }
+  .tool select { padding: 8px 10px; font-size: 14px; border: 1px solid var(--line); border-radius: 8px; background: #fff; }
+  .tool .b-row { display: flex; gap: 8px; align-items: center; margin: 6px 0; }
+  .tool .b-row input { flex: 1; padding: 8px 10px; font-size: 14px; }
+  .tool .b-row select { flex: 1; }
+  .tool .b-row button { padding: 6px 12px; font-size: 13px; }
+  .tool .actions button + button { margin-left: 0; }
+  .report-wrap ul { padding-left: 20px; margin: 6px 0; font-size: 13px; }
+  .report-wrap ul li { margin: 3px 0; }
   .report-wrap { margin-top: 20px; padding: 24px; border-radius: 14px; background: #fff; border: 1px solid var(--line); position: relative; overflow: hidden; }
   .report-wrap h1 { font-size: 22px; margin: 0 0 4px; color: var(--teal); }
   .report-wrap h2 { font-size: 15px; margin: 18px 0 6px; }
@@ -80,8 +88,8 @@
   .report-wrap .report { position: relative; }
 
   @page { size: A4; margin: 16mm 14mm; }
-  body.printing #content > *:not(#tool) { display: none !important; }
-  body.printing #tool > *:not(#reportOut) { display: none !important; }
+  body.printing #content > *:not(#tool-report) { display: none !important; }
+  body.printing #tool-report > *:not(#reportOut) { display: none !important; }
   body.printing .tool { box-shadow: none; padding: 0; }
   body.printing .report-wrap { border: none; padding: 0; }
   body.printing main { max-width: none; padding: 0; }

@@ -11,8 +11,20 @@ if (!password) throw new Error("用法: node tools/build-site.mjs <password>");
 
 const read = (p) => readFileSync(join(root, p), "utf8");
 const payload = {
-  html: read("private/content.html") + "\n" + read("tools/report/tool-section.html"),
-  js: read("tools/report/report-core.js") + "\n" + read("tools/report/ui.js"),
+  html: [
+    "private/content.html",
+    "tools/report/tool-section.html",
+    "tools/site/diag-section.html",
+    "tools/site/balance-section.html",
+  ].map(read).join("\n"),
+  js: [
+    "tools/report/report-core.js",
+    "tools/report/ui.js",
+    "tools/site/diag-core.js",
+    "tools/site/balance-core.js",
+    "tools/site/diag.js",
+    "tools/site/balance.js",
+  ].map(read).join("\n"),
 };
 
 const enc = new TextEncoder();
