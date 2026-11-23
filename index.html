@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>AI 运维咨询</title>
+<style>
+  body { font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; max-width: 720px; margin: 40px auto; padding: 0 20px; color: #222; line-height: 1.7; }
+  #gate { display: flex; gap: 8px; margin-top: 60px; }
+  input { flex: 1; padding: 10px; font-size: 16px; border: 1px solid #ccc; border-radius: 6px; }
+  button { padding: 10px 18px; font-size: 16px; border: 0; border-radius: 6px; background: #222; color: #fff; cursor: pointer; }
+  #err { color: #c00; min-height: 1.5em; }
+  h2 { margin-top: 1.6em; }
+</style>
+</head>
+<body>
+<div id="gate">
+  <input id="pw" type="password" placeholder="请输入访问密码" autocomplete="off">
+  <button id="go">进入</button>
+</div>
+<div id="err"></div>
+<div id="content" hidden></div>
+<script>
+const b64 = (s) => Uint8Array.from(atob(s), c => c.charCodeAt(0));
+async function unlock() {
+  const pw = document.getElementById("pw").value;
+  const err = document.getElementById("err");
+  try {
+    const { salt, iv, data } = await (await fetch("content.enc.json")).json();
+    const km = await crypto.subtle.importKey("raw", new TextEncoder().encode(pw), "PBKDF2", false, ["deriveKey"]);
+    const key = await crypto.subtle.deriveKey(
+      { name: "PBKDF2", salt: b64(salt), iterations: 600000, hash: "SHA-256" },
+      km, { name: "AES-GCM", length: 256 }, false, ["decrypt"]
+    );
+    const plain = await crypto.subtle.decrypt({ name: "AES-GCM", iv: b64(iv) }, key, b64(data));
+    document.getElementById("content").innerHTML = new TextDecoder().decode(plain);
+    document.getElementById("gate").remove();
+    err.textContent = "";
+    document.getElementById("content").hidden = false;
+  } catch (e) {
+    err.textContent = "密码错误";
+  }
+}
+document.getElementById("go").onclick = unlock;
+document.getElementById("pw").addEventListener("keydown", e => { if (e.key === "Enter") unlock(); });
+</script>
+</body>
+</html>
